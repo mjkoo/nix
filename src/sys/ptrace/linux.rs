@@ -184,7 +184,8 @@ fn ptrace_peek(request: Request, pid: Pid, addr: AddressType, data: *mut c_void)
     target_os = "linux",
     any(all(target_arch = "x86_64",
             any(target_env = "gnu", target_env = "musl")),
-        all(target_arch = "x86", target_env = "gnu"))
+        all(target_arch = "x86",
+            any(target_env = "gnu", target_env = "musl")))
 ))]
 pub fn getregs(pid: Pid) -> Result<user_regs_struct> {
     ptrace_get_data::<user_regs_struct>(Request::PTRACE_GETREGS, pid)
@@ -195,7 +196,8 @@ pub fn getregs(pid: Pid) -> Result<user_regs_struct> {
     target_os = "linux",
     any(all(target_arch = "x86_64",
             any(target_env = "gnu", target_env = "musl")),
-        all(target_arch = "x86", target_env = "gnu"))
+        all(target_arch = "x86",
+            any(target_env = "gnu", target_env = "musl")))
 ))]
 pub fn setregs(pid: Pid, regs: user_regs_struct) -> Result<()> {
     let res = unsafe {
