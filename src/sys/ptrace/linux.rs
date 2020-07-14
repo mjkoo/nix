@@ -14,7 +14,8 @@ pub type AddressType = *mut ::libc::c_void;
     target_os = "linux",
     any(all(target_arch = "x86_64",
             any(target_env = "gnu", target_env = "musl")),
-        all(target_arch = "x86", target_env = "gnu"))
+        all(target_arch = "x86",
+            any(target_env = "gnu", target_env = "musl")))
 ))]
 use libc::user_regs_struct;
 
